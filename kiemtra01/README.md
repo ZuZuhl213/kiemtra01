@@ -1,53 +1,53 @@
 # kiemtra01
 
-Microservices demo with Django REST Framework, React, TailwindCSS, JWT, Nginx, MySQL, and PostgreSQL.
+Demo microservices với Django REST Framework, React (Vite), JWT, Nginx, MySQL và PostgreSQL.
 
-## Services
+## Cấu trúc service
 
-- `customer-service` -> MySQL
-- `staff-service` -> MySQL
-- `laptop-service` -> PostgreSQL
-- `mobile-service` -> PostgreSQL
-- `clothes-service` -> PostgreSQL
-- `api-gateway` -> Nginx
-- `frontend-customer` -> React + Tailwind
-- `frontend-staff` -> React + Tailwind
+- `api-gateway`: Nginx reverse proxy
+- `customer-service`: Django + MySQL
+- `staff-service`: Django + MySQL
+- `laptop-service`: Django + PostgreSQL
+- `mobile-service`: Django + PostgreSQL
+- `clothes-service`: Django + PostgreSQL
+- `frontend-customer`: React + Vite + Tailwind
+- `frontend-staff`: React + Vite + Tailwind
 
-## Run UI + BE
+## Cách chạy nhanh
 
-1. Copy `.env.example` to `.env`
-2. Update values if needed
-3. Start all services (UI, BE, DB, gateway):
+1. Tạo file môi trường:
+
+```bash
+cp .env.example .env
+```
+
+2. Build và chạy toàn bộ hệ thống:
 
 ```bash
 docker compose up --build -d
 ```
 
-4. Open app through gateway: `http://localhost:8080`
+3. Truy cập qua gateway:
 
-## Development URLs
+- `http://localhost:8080`
 
-- API Gateway: `http://localhost:8080`
-- MySQL (host): `localhost:3307`
-- PostgreSQL (host): `localhost:5434`
-
-## Seed accounts
+## Tài khoản seed
 
 - Customer: `alice` / `password123`
 - Customer: `bob` / `password123`
 - Staff: `manager` / `password123`
 - Staff: `editor` / `password123`
 
-Seed users are created automatically on startup by:
+Seed được chạy tự động khi container backend khởi động.
 
-- `customer-service`: `python manage.py seed_data`
-- `staff-service`: `python manage.py seed_data`
+## Cổng phát triển
 
-## Notes
+- Gateway: `localhost:8080`
+- MySQL (host): `localhost:3307`
+- PostgreSQL (host): `localhost:5434`
 
-- Django migrations run automatically in each backend container.
-- Seed commands are idempotent and run automatically on startup.
-- Product tables are created only by Django migrations.
-- Databases created automatically:
-	- MySQL: `MYSQL_DATABASE_CUSTOMER`, `MYSQL_DATABASE_STAFF`, `MYSQL_DATABASE_EXTRA`
-	- PostgreSQL: `POSTGRES_DATABASE_LAPTOP`, `POSTGRES_DATABASE_MOBILE`, `POSTGRES_DATABASE_CLOTHES`, `POSTGRES_DATABASE_EXTRA`
+## Ghi chú
+
+- Migrations chạy tự động trong mỗi backend container.
+- Các lệnh seed được thiết kế idempotent.
+- CSDL được tạo theo biến môi trường trong `.env`.
