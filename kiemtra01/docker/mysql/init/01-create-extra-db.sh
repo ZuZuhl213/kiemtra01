@@ -1,0 +1,6 @@
+#!/bin/sh
+set -e
+
+mysql -uroot -p"${MYSQL_ROOT_PASSWORD}" <<EOF
+CREATE DATABASE IF NOT EXISTS \`${MYSQL_DATABASE_STAFF}\`;
+EOF
